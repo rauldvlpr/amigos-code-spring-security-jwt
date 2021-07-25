@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUser(String username) {
-        log.info("Fetching user {} ", user.getName());
+        log.info("Fetching user {} ",username);
         return userRepository.fingByUsername(username);
     }
 
