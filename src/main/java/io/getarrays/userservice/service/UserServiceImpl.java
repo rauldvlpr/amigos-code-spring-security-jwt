@@ -6,6 +6,7 @@ import io.getarrays.userservice.repository.RoleRepository;
 import io.getarrays.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService{
     private final RoleRepository roleRepository;
 
     @Override
-    public User saveUSer(User user) {
+    public User saveUser(User user) {
         log.info("Saving new User {} to the database", user.getName());
         return userRepository.save(user);
     }
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService{
 
         log.info("Add rol {}  to user  {} to the database", roleName, username);
 
-        User user = userRepository.fingByUsername(username);
+        User user = userRepository.findByUsername(username);
         Role role = roleRepository.findByName(roleName);
 
         user.getRoles().add(role);
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUser(String username) {
         log.info("Fetching user {} ",username);
-        return userRepository.fingByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     @Override
